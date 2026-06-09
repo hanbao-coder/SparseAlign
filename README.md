@@ -15,8 +15,8 @@ SparseAlign 是一个轻量级的大语言模型（LLM）压缩框架，针对 *
 | 方案 | PPL | 相对仅剪枝的改善 |
 |------|-----|------------------|
 | 原始模型 | 33.62 | — |
-| 仅剪枝（Wanda） | 298.11 | — |
-| **剪枝 + 逐层补偿** | **82.48** | **↓ 72.4%** |
+| 仅剪枝（Wanda） | 302.818 | — |
+| **剪枝 + 逐层补偿** | **70.766** | **↓ 86.2%** |
 
 ---
 
@@ -210,26 +210,10 @@ Laco-main/
 - 先在 50% 稀疏度验证趋势，再逐步提升稀疏度
 - 每次实验前清理旧检查点：`Remove-Item -Recurse -Force checkpoints`
 
-### Q2：检查点的作用是什么？
-检查点在每层补偿完成后保存（默认每 4 层保存一次），用于中断恢复。**不能直接用于补偿操作**，因为补偿是逐层进行的，必须从头开始执行流水线。
 
-### Q3：仅加载模型模式下进度条不动？
-`evaluation.py` 中的 `llama_evaluate_perplexity()` 已内置 `progress_callback` 回调。在 GUI 模式下会自动触发进度更新；CLI 模式则通过日志输出每层评估结果。
-
-### Q4：可以使用其他数据集吗？
+### Q2：可以使用其他数据集吗？
 当前版本已简化为仅支持 WikiText2（离线加载）。如需更换数据集，修改 `sparsealign/data.py` 中的 `get_loaders()` 函数即可。
+
 
 ---
 
-## License
-
-基于原项目 LaCo（Liu et al., ACL 2025）开源协议。本项目在其基础上进行了精简、重构与功能扩展。
-
-```bibtex
-@inproceedings{liu2025laco,
-    title     = {LaCo: Layer-wise Compensation for Pruned Large Language Models},
-    author    = {Liu, Yingen and Wu, Fan and Pan, Xuyan and Li, Ruihui and Tang, Zhuo and Li, Kenli},
-    booktitle = {ACL},
-    year      = {2025}
-}
-```
