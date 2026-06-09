@@ -1,0 +1,23 @@
+{
+  "model_path": "models/Qwen1.5-1.8B-Chat",
+  "dataset_path": "data/wikitext2",
+  "seed": 42,
+  "nsamples": 128,
+  "seqlen": 128,
+  "method": "wanda",
+  "sparsity": 0.7,
+  "prune": false,
+  "compensate": false,
+  "epochs": 10,
+  "lr": 5e-05,
+  "distill": false,
+  "distill_epochs": 5,
+  "distill_lr": 1e-05,
+  "device": "cuda:0",
+  "log_path": "./logs",
+  "checkpoint_dir": "./checkpoints",
+  "cache_dir": "./cache",
+  "save_interval": 4,
+  "resume": false,
+  "gui_mode": 0
+}
